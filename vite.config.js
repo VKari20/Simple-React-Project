@@ -1,8 +1,17 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/week-3-react-js-assignment-VKari20/', // 👈 add this line
+  base: '/Simple-React-Project/',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/booksapi': {
+        target: 'https://www.googleapis.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/booksapi/, ''),
+      }
+    }
+  }
 })

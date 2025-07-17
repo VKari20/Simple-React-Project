@@ -8,26 +8,28 @@ export default function BookList() {
   const [loading, setLoading] = useState(true);
 
   // Fetch books from mock API
-  useEffect(() => {
-    fetch("http://localhost:4000/books")
-      .then((res) => res.json())
-      .then((data) => {
-        // Add cover and progress if not in API
-        const enrichedBooks = data.map((book) => ({
-          ...book,
-          cover: "https://covers.openlibrary.org/b/id/10958349-L.jpg", // fallback
-          progress:
-            book.status === "Want to Read" ? 0 :
-            book.status === "Reading" ? 50 : 100
-        }));
-        setBooks(enrichedBooks);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch books:", error);
-        setLoading(false);
-      });
-  }, []);
+  fetch("/booksapi/books/v1/volumes?q=harry+potter")
+  .then((res) => res.json())
+  .then((data) => {
+    const enrichedBooks = data.items.map((item) => {
+      const volume = item.volumeInfo;
+      return {
+        id: item.id,
+        title: volume.title || "Untitled",
+        status: "Want to Read",
+        cover: volume.imageLinks?.thumbnail || "https://covers.openlibrary.org/b/id/10958349-L.jpg",
+        progress: 0
+      };
+    });
+
+    setBooks(enrichedBooks);
+    setLoading(false);
+  })
+  .catch((error) => {
+    console.error("Failed to fetch books:", error);
+    setLoading(false);
+  });
+
 
   const handleStatusChange = (id) => {
     setBooks((prevBooks) =>

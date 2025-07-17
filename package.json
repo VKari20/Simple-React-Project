@@ -3,14 +3,14 @@
   "type": "module",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://PLP-MERN-Stack-Development.github.io/week-3-react-js-assignment-VKari20",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  },
+  "homepage": "https://vkari20.github.io/Simple-React-Project/",
+ "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+},
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
