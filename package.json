@@ -3,10 +3,13 @@
   "type": "module",
   "private": true,
   "version": "1.0.0",
+  "homepage": "https://PLP-MERN-Stack-Development.github.io/week-3-react-js-assignment-VKari20",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -16,6 +19,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.1.0",
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "vite": "^4.4.9"
