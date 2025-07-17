@@ -8,27 +8,30 @@ export default function BookList() {
   const [loading, setLoading] = useState(true);
 
   // Fetch books from mock API
-  fetch("/booksapi/books/v1/volumes?q=harry+potter")
+ fetch("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
   .then((res) => res.json())
   .then((data) => {
-    const enrichedBooks = data.items.map((item) => {
-      const volume = item.volumeInfo;
+    const books = data.items.map((item) => {
+      const info = item.volumeInfo;
       return {
         id: item.id,
-        title: volume.title || "Untitled",
+        title: info.title || "Untitled",
         status: "Want to Read",
-        cover: volume.imageLinks?.thumbnail || "https://covers.openlibrary.org/b/id/10958349-L.jpg",
-        progress: 0
+        cover:
+          info.imageLinks?.thumbnail ||
+          "https://covers.openlibrary.org/b/id/10958349-L.jpg",
+        progress: 0,
       };
     });
-
-    setBooks(enrichedBooks);
+    setBooks(books);
     setLoading(false);
   })
-  .catch((error) => {
-    console.error("Failed to fetch books:", error);
+  .catch((err) => {
+    console.error("Failed to fetch books:", err);
     setLoading(false);
   });
+
+
 
 
   const handleStatusChange = (id) => {
